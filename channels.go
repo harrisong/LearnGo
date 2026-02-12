@@ -4,10 +4,12 @@ import "fmt"
 
 func main() {
 	c := make(chan int, 1)
-
 	c <- 40
+	close(c)
 
-	for i := 0; i < 1; i++ {
-		fmt.Println(<-c)
-	}
+	val, ok := <-c
+	fmt.Println(val, ok)
+
+	val2, ok2 := <-c
+	fmt.Println(val2, ok2)
 }
